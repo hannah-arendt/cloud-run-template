@@ -1,4 +1,4 @@
-PROJECT_ID ?= my-project
+PROJECT_ID ?= my-project-1234
 REGION ?= my-region
 IMAGE := $(REGION)-docker.pkg.dev/$(PROJECT_ID)/my-project/my-project:latest
 DATA_BUCKET := $(PROJECT_ID)-data
@@ -17,7 +17,8 @@ set-project:
 	gcloud config set project $(PROJECT_ID)
 
 build:
-	venv/bin/pip freeze > requirements.txt
+	venv/bin/pip freeze > requirements.new && diff -q requirements.new requirements.txt >/dev/null || mv requirements.new requirements.txt
+	rm -f requirements.new
 	docker buildx build --platform=linux/amd64 -t my-project . --load
 
 push:

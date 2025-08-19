@@ -22,7 +22,7 @@ Create a Google Cloud project or use an existing one; let us assume the project 
    source venv/bin/activate
    pip install fastapi uvicorn google-cloud-storage google-cloud-secret-manager
    ```
-3. Replace `my-project` with `kerfuffle` in the `Makefile` and all Terraform files.
+3. Replace `my-project-1234` with your actual Google Cloud project ID, e.g. `kerfuffle-443622` in the `Makefile`. Replace `my-region` with your actual region, e.g. `us-west2` and replace `my-project` with `kerfuffle` in the .tf files.
 4. Run `make init`. The service will fail to start because we haven't pushed the Docker image yet (since we need to create the artifact registry first).
 5. Run `make`. This will build the Docker image, push it to the Google Artifact Registry, and deploy it to Cloud Run.
 
